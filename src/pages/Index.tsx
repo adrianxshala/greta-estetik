@@ -65,15 +65,8 @@ const Index = () => {
       {/* Testimonials */}
       <TestimonialsCarousel />
 
-      {/* Pricing */}
-      <div id="pricing">
-        <PricingSection />
-      </div>
+    
 
-      {/* FAQ */}
-      <div id="faq">
-        <FAQAccordion />
-      </div>
 
       {/* Footer with Contact */}
       <Footer />
