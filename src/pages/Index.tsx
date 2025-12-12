@@ -4,8 +4,7 @@ import Hero from "@/components/Hero";
 import ServicesGrid from "@/components/ServicesGrid";
 import BeforeAfterSection from "@/components/BeforeAfterSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
-import PricingSection from "@/components/PricingSection";
-import FAQAccordion from "@/components/FAQAccordion";
+
 import Footer from "@/components/Footer";
 import BookingModal from "@/components/BookingModal";
 import StickyCTA from "@/components/StickyCTA";

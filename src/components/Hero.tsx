@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
-import { ChevronDown } from "lucide-react";
+import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Phone, Sparkles, Award, Users } from "lucide-react";
+import heroImage from "../../public/greta png.png";
 
 interface HeroProps {
   onBookClick: () => void;
@@ -7,92 +9,158 @@ interface HeroProps {
 }
 
 const Hero = ({ onBookClick, onBeforeAfterClick }: HeroProps) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Parallax Effect */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-fixed"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop')`,
-        }}
-      />
-      
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/50 to-primary/80" />
-      
-      {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-accent/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-rose/20 rounded-full blur-3xl animate-float delay-500" />
-
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-accent/20 backdrop-blur-sm border border-accent/30 rounded-full px-6 py-2 mb-8">
-            <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <span className="text-primary-foreground/90 text-sm font-medium tracking-wide">
-              Klinikë Estetike Premium
-            </span>
-          </div>
-
-          {/* Main Headline */}
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-primary-foreground leading-tight mb-6">
-            Rinovimi i Lëkurës me{" "}
-            <span className="text-accent">Botox</span>
-            <br />
-            <span className="text-3xl md:text-5xl lg:text-6xl">Siguri dhe Estetikë</span>
-          </h1>
-
-          {/* Subtext */}
-          <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-            Rezultate natyrale, procedura të sigurta. Konsultimi falas nga ekspertët tanë të certifikuar.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button 
-              onClick={onBookClick}
-              className="group relative bg-accent text-accent-foreground px-10 py-5 rounded-full font-semibold tracking-wide
-                         transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl hover:shadow-accent/40
-                         focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
-              aria-label="Book a consultation"
-            >
-              <span className="relative z-10">Book Consultation</span>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-accent to-gold-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </button>
+    <section className="relative min-h-[95vh] overflow-hidden bg-gradient-to-br from-rose-50 via-white to-pink-50 px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
+          
+          {/* TEXT CONTENT - Mobile first: always on top */}
+          <div className="relative z-10 space-y-8 text-center lg:text-left order-2 lg:order-1">
+            <div className="inline-block animate-float">
+              <span className="text-sm font-semibold text-rose-600 bg-gradient-to-r from-rose-100 to-pink-100 px-5 py-2 rounded-full shadow-md backdrop-blur-sm border border-rose-200">
+                ✨ Mirësevini te
+              </span>
+            </div>
             
-            <button 
-              onClick={onBeforeAfterClick}
-              className="group bg-transparent border-2 border-primary-foreground/30 text-primary-foreground
-                         px-10 py-5 rounded-full font-medium tracking-wide
-                         transition-all duration-300 ease-out
-                         hover:bg-primary-foreground/10 hover:border-primary-foreground/50
-                         focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary"
-              aria-label="View before and after results"
-            >
-              See Before/After
-            </button>
-          </div>
-        </div>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
+              <span className="bg-gradient-to-r from-rose-600 via-pink-600 to-rose-500 bg-clip-text text-transparent animate-gradient">
+                GB Aesthetic Medicine
+              </span>
+            </h1>
+            
+            <p className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Zbuloni bukurinë tuaj natyrore me trajtime estetike të avancuara, 
+              të realizuara me kujdes dhe profesionalizëm.
+            </p>
 
-        {/* Scroll Indicator */}
-        <div className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <button 
-            onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-            className="flex flex-col items-center gap-2 text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-            aria-label="Scroll to services"
-          >
-            <span className="text-sm tracking-widest uppercase">Explore</span>
-            <ChevronDown className="w-6 h-6 animate-bounce" />
-          </button>
+            {/* CTA BUTTONS - Interactive & modern */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6">
+              <Button 
+                onClick={onBookClick}
+                size="lg"
+                className="group relative bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white shadow-xl hover:shadow-2xl transition-all duration-500 text-base sm:text-lg px-10 py-7 rounded-full overflow-hidden transform hover:scale-105"
+              >
+                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-500"></span>
+                <Phone className="mr-2 h-5 w-5 animate-pulse" />
+                <span className="relative">Rezervo Termin</span>
+              </Button>
+              
+              <Button 
+                onClick={onBeforeAfterClick}
+                variant="outline"
+                size="lg"
+                className="group border-2 border-rose-400 text-rose-600 hover:bg-gradient-to-r hover:from-rose-50 hover:to-pink-50 shadow-lg hover:shadow-xl transition-all duration-500 text-base sm:text-lg px-10 py-7 rounded-full transform hover:scale-105"
+              >
+                <Sparkles className="mr-2 h-5 w-5 group-hover:animate-spin" />
+                Shiko Shërbimet
+              </Button>
+            </div>
+
+            {/* Stats - Modern card grid */}
+           
+          </div>
+
+          {/* IMAGE AREA - Redesigned with overlay text */}
+          <div className="relative lg:h-[700px] h-[400px] mt-8 order-1 lg:order-2 border">
+            {/* Animated gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-rose-300/50 via-pink-300/50 to-purple-300/50 rounded-[3rem] blur-3xl animate-pulse-slow"></div>
+            
+            {/* Main image container */}
+            <div className="relative h-full rounded-[3rem] overflow-hidden shadow-2xl group">
+              <img 
+                src={heroImage} 
+                alt="Dr. Greta Berisha"
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+              
+              {/* Overlay gradient for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              
+              {/* Text overlay INSIDE photo */}
+              <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10 text-white z-10">
+                <div className="inline-block mb-3">
+                  <span className="text-xs sm:text-sm font-bold text-rose-300 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30">
+                    ⭐ Eksperte e Certifikuar
+                  </span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight mb-2 drop-shadow-lg">
+                  Dr. Greta Berisha
+                </h2>
+                <p className="text-sm sm:text-base text-rose-100 font-medium drop-shadow-md">
+                  Stomatologe dhe Estetiste e Certifikuar
+                </p>
+                
+                {/* Decorative line */}
+                <div className="mt-4 w-20 h-1 bg-gradient-to-r from-rose-400 to-pink-400 rounded-full"></div>
+              </div>
+
+              {/* Decorative corner elements */}
+              <div className="absolute top-6 right-6 w-16 h-16 border-t-4 border-r-4 border-white/30 rounded-tr-3xl"></div>
+              <div className="absolute bottom-6 left-6 w-16 h-16 border-b-4 border-l-4 border-white/30 rounded-bl-3xl"></div>
+            </div>
+
+            {/* FLOATING BADGES - Redesigned */}
+            {/* <div className="absolute -top-6 -right-6 bg-gradient-to-br from-white to-rose-50 rounded-2xl shadow-2xl p-5 animate-float border-2 border-rose-200 hover:scale-110 transition-transform duration-300 cursor-pointer">
+              <div className="text-3xl mb-1">✨</div>
+              <div className="text-sm font-bold text-gray-800">Trajtime Premium</div>
+              <div className="text-xs text-rose-600 font-semibold">Cilësi e lartë</div>
+            </div>
+
+            <div className="absolute -bottom-6 -left-6 bg-gradient-to-br from-white to-pink-50 rounded-2xl shadow-2xl p-5 animate-float-delayed border-2 border-pink-200 hover:scale-110 transition-transform duration-300 cursor-pointer">
+              <div className="text-3xl mb-1">💎</div>
+              <div className="text-sm font-bold text-gray-800">Rezultate Natyrore</div>
+              <div className="text-xs text-pink-600 font-semibold">Bukuri e vërtetë</div>
+            </div> */}
+          </div>
         </div>
       </div>
+
+      {/* Enhanced BG Decorations */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-rose-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 0.3; }
+        }
+        
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+          animation: float-delayed 3s ease-in-out infinite;
+          animation-delay: 1s;
+        }
+        
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+        
+        .animate-pulse-slow {
+          animation: pulse-slow 4s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };
