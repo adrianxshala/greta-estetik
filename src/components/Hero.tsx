@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+"use client";
+
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Phone, Sparkles, Award, Users } from "lucide-react";
+import { Phone, Sparkles } from "lucide-react";
+import { useState } from "react";
 import heroImage from "../../public/greta png.png";
 
 interface HeroProps {
@@ -8,159 +11,356 @@ interface HeroProps {
   onBeforeAfterClick: () => void;
 }
 
+/* =======================
+   Framer Motion Variants
+   ======================= */
+const containerStagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const fadeBlurUp = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    filter: "blur(12px)",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+};
+
+const imageReveal = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    rotateY: -20,
+    rotateX: 10,
+    filter: "blur(20px)",
+    y: 50,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotateY: 0,
+    rotateX: 0,
+    filter: "blur(0px)",
+    y: 0,
+    transition: {
+      duration: 1.5,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      delay: 0.3,
+    },
+  },
+};
+
+const floating = {
+  animate: {
+    y: [0, -15, 0],
+    rotate: [0, 2, -2, 0],
+    transition: {
+      duration: 5,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const sparkleAnimation = {
+  animate: {
+    rotate: [0, 360],
+    scale: [1, 1.2, 1],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const gradientText = {
+  animate: {
+    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+    transition: {
+      duration: 5,
+      repeat: Infinity,
+      ease: "linear",
+    },
+  },
+};
+
 const Hero = ({ onBookClick, onBeforeAfterClick }: HeroProps) => {
-  useEffect(() => {}, []);
+  const [imageHovered, setImageHovered] = useState(false);
 
   return (
-    <section className="relative min-h-[95vh] overflow-hidden bg-gradient-to-br from-rose-50 via-white to-pink-50 px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-pink-50 via-white to-purple-50">
+      {/* Animated Background Blobs */}
+      <motion.div
+        className="absolute top-20 -right-20 w-96 h-96 bg-pink-400/20 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          x: [0, 50, 0],
+          y: [0, 30, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute -bottom-20 -left-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.3, 1],
+          x: [0, -40, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+      />
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-300/10 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <div className="container mx-auto px-4 py-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           
-          {/* TEXT CONTENT - Mobile first: always on top */}
-          <div className="relative z-10 space-y-8 text-center lg:text-left order-2 lg:order-1">
-            <div className="inline-block animate-float">
-              <span className="text-sm font-semibold text-rose-600 bg-gradient-to-r from-rose-100 to-pink-100 px-5 py-2 rounded-full shadow-md backdrop-blur-sm border border-rose-200">
-                ✨ Mirësevini te
-              </span>
-            </div>
-            
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
-              <span className="bg-gradient-to-r from-rose-600 via-pink-600 to-rose-500 bg-clip-text text-transparent animate-gradient">
-                GB Aesthetic Medicine
-              </span>
-            </h1>
-            
-            <p className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Zbuloni bukurinë tuaj natyrore me trajtime estetike të avancuara, 
-              të realizuara me kujdes dhe profesionalizëm.
-            </p>
+          {/* TEXT CONTENT */}
+          <motion.div
+            variants={containerStagger}
+            initial="hidden"
+            animate="visible"
+            className="space-y-6 text-center lg:text-left order-2 lg:order-1"
+          >
+            <motion.div
+              variants={fadeBlurUp}
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-pink-100 rounded-full text-pink-600 font-medium cursor-default shadow-sm hover:shadow-md transition-shadow"
+            >
+              <motion.div variants={sparkleAnimation} animate="animate">
+                <Sparkles className="w-4 h-4" />
+              </motion.div>
+              ✨ Mirësevini te GB Aesthetic Medicine
+            </motion.div>
 
-            {/* CTA BUTTONS - Interactive & modern */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6">
-              <Button 
-                onClick={onBookClick}
-                size="lg"
-                className="group relative bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white shadow-xl hover:shadow-2xl transition-all duration-500 text-base sm:text-lg px-10 py-7 rounded-full overflow-hidden transform hover:scale-105"
+            <motion.h1
+              variants={fadeBlurUp}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
+            >
+              Zbuloni bukurinë tuaj{" "}
+              <motion.span
+                variants={gradientText}
+                animate="animate"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-pink-600 bg-[length:200%_auto] inline-block"
               >
-                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-500"></span>
-                <Phone className="mr-2 h-5 w-5 animate-pulse" />
-                <span className="relative">Rezervo Termin</span>
-              </Button>
-              
-              <Button 
-                onClick={onBeforeAfterClick}
-                variant="outline"
-                size="lg"
-                className="group border-2 border-rose-400 text-rose-600 hover:bg-gradient-to-r hover:from-rose-50 hover:to-pink-50 shadow-lg hover:shadow-xl transition-all duration-500 text-base sm:text-lg px-10 py-7 rounded-full transform hover:scale-105"
+                natyrore
+              </motion.span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeBlurUp}
+              className="text-lg md:text-xl text-gray-600 max-w-xl mx-auto lg:mx-0"
+            >
+              me trajtime estetike të avancuara, të realizuara me kujdes dhe
+              profesionalizëm.
+            </motion.p>
+
+            <motion.div
+              variants={fadeBlurUp}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Sparkles className="mr-2 h-5 w-5 group-hover:animate-spin" />
-                Shiko Shërbimet
-              </Button>
-            </div>
+                <Button
+                  size="lg"
+                  onClick={onBookClick}
+                  aria-label="Rezervo termin me Dr. Greta Berisha"
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white shadow-lg hover:shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 w-full sm:w-auto"
+                >
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                  >
+                    <Phone className="mr-2 h-5 w-5 inline" />
+                  </motion.div>
+                  Rezervo Termin
+                </Button>
+              </motion.div>
 
-            {/* Stats - Modern card grid */}
-           
-          </div>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={onBeforeAfterClick}
+                  aria-label="Shiko fotot para dhe pas trajtimeve"
+                  className="border-2 border-pink-500 text-pink-600 hover:bg-pink-50 hover:border-pink-600 hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
+                >
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  >
+                    <Sparkles className="mr-2 h-5 w-5 inline" />
+                  </motion.div>
+                  Shiko Shërbimet
+                </Button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
 
-          {/* IMAGE AREA - Redesigned with overlay text */}
-          <div className="relative lg:h-[700px] h-[400px] mt-8 order-1 lg:order-2 border">
-            {/* Animated gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-rose-300/50 via-pink-300/50 to-purple-300/50 rounded-[3rem] blur-3xl animate-pulse-slow"></div>
-            
-            {/* Main image container */}
-            <div className="relative h-full rounded-[3rem] overflow-hidden shadow-2xl group">
-              <img 
-                src={heroImage} 
-                alt="Dr. Greta Berisha"
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+          {/* IMAGE AREA */}
+          <motion.div
+            variants={imageReveal}
+            initial="hidden"
+            animate="visible"
+            className="relative order-1 lg:order-2 flex justify-center"
+          >
+            <motion.div
+              variants={floating}
+              animate="animate"
+              onHoverStart={() => setImageHovered(true)}
+              onHoverEnd={() => setImageHovered(false)}
+              className="relative aspect-[3/4] max-w-[200px] sm:max-w-[240px] md:max-w-[280px] lg:max-w-[320px] mx-auto rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl cursor-pointer group"
+            >
+              {/* Animated Border Glow */}
+              <motion.div
+                className="absolute -inset-1 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 blur-sm"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                style={{
+                  backgroundSize: "200% 200%",
+                }}
               />
-              
-              {/* Overlay gradient for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-              
-              {/* Text overlay INSIDE photo */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10 text-white z-10">
-                <div className="inline-block mb-3">
-                  <span className="text-xs sm:text-sm font-bold text-rose-300 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30">
-                    ⭐ Eksperte e Certifikuar
-                  </span>
-                </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight mb-2 drop-shadow-lg">
+
+              {/* Shimmer Effect on Load */}
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: "200%" }}
+                transition={{
+                  duration: 2,
+                  delay: 1.5,
+                  ease: "easeInOut",
+                }}
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 z-20"
+              />
+
+              <motion.div
+                animate={{
+                  scale: imageHovered ? 1.05 : 1,
+                }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative w-full h-full z-10"
+              >
+                <img
+                  src={heroImage}
+                  alt="Dr. Greta Berisha - Stomatologe dhe Estetiste e Certifikuar"
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+                
+                {/* Gradient Overlay on Hover */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: imageHovered ? 0.1 : 0 }}
+                  className="absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-600"
+                  transition={{ duration: 0.3 }}
+                />
+
+                {/* Animated Particles Effect */}
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-2 h-2 bg-pink-400 rounded-full"
+                    initial={{
+                      x: "50%",
+                      y: "50%",
+                      opacity: 0,
+                      scale: 0,
+                    }}
+                    animate={{
+                      x: `${50 + (Math.random() - 0.5) * 100}%`,
+                      y: `${50 + (Math.random() - 0.5) * 100}%`,
+                      opacity: [0, 1, 0],
+                      scale: [0, 1, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      delay: 1.8 + i * 0.2,
+                      repeat: Infinity,
+                      repeatDelay: 3,
+                    }}
+                  />
+                ))}
+              </motion.div>
+
+              {/* Glow Effect */}
+              <motion.div
+                animate={{
+                  boxShadow: imageHovered
+                    ? "0 25px 50px -12px rgba(236, 72, 153, 0.5), 0 0 60px rgba(168, 85, 247, 0.3)"
+                    : "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 0 40px rgba(236, 72, 153, 0.2)",
+                }}
+                className="absolute inset-0 pointer-events-none z-10 rounded-2xl sm:rounded-3xl"
+              />
+
+              {/* BOTTOM INFO CARD */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{
+                  opacity: 1,
+                  y: imageHovered ? -5 : 0,
+                }}
+                transition={{ 
+                  opacity: { delay: 1.8, duration: 0.5 },
+                  y: { duration: 0.3 }
+                }}
+                className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-lg z-20 border border-pink-100"
+              >
+                <p className="font-bold text-gray-900 text-sm sm:text-base md:text-lg">
                   Dr. Greta Berisha
-                </h2>
-                <p className="text-sm sm:text-base text-rose-100 font-medium drop-shadow-md">
+                </p>
+                <p className="text-xs sm:text-sm text-gray-600">
                   Stomatologe dhe Estetiste e Certifikuar
                 </p>
-                
-                {/* Decorative line */}
-                <div className="mt-4 w-20 h-1 bg-gradient-to-r from-rose-400 to-pink-400 rounded-full"></div>
-              </div>
-
-              {/* Decorative corner elements */}
-              <div className="absolute top-6 right-6 w-16 h-16 border-t-4 border-r-4 border-white/30 rounded-tr-3xl"></div>
-              <div className="absolute bottom-6 left-6 w-16 h-16 border-b-4 border-l-4 border-white/30 rounded-bl-3xl"></div>
-            </div>
-
-            {/* FLOATING BADGES - Redesigned */}
-            {/* <div className="absolute -top-6 -right-6 bg-gradient-to-br from-white to-rose-50 rounded-2xl shadow-2xl p-5 animate-float border-2 border-rose-200 hover:scale-110 transition-transform duration-300 cursor-pointer">
-              <div className="text-3xl mb-1">✨</div>
-              <div className="text-sm font-bold text-gray-800">Trajtime Premium</div>
-              <div className="text-xs text-rose-600 font-semibold">Cilësi e lartë</div>
-            </div>
-
-            <div className="absolute -bottom-6 -left-6 bg-gradient-to-br from-white to-pink-50 rounded-2xl shadow-2xl p-5 animate-float-delayed border-2 border-pink-200 hover:scale-110 transition-transform duration-300 cursor-pointer">
-              <div className="text-3xl mb-1">💎</div>
-              <div className="text-sm font-bold text-gray-800">Rezultate Natyrore</div>
-              <div className="text-xs text-pink-600 font-semibold">Bukuri e vërtetë</div>
-            </div> */}
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
-
-      {/* Enhanced BG Decorations */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-rose-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
-
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
-        }
-        
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 0.3; }
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        
-        .animate-float-delayed {
-          animation: float-delayed 3s ease-in-out infinite;
-          animation-delay: 1s;
-        }
-        
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-        
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 };

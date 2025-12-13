@@ -17,30 +17,32 @@ const Index = () => {
   };
 
   const scrollToBeforeAfter = () => {
-    document.getElementById('before-after')?.scrollIntoView({ behavior: 'smooth' });
+    document
+      .getElementById("before-after")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   // Handle escape key for modal
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isBookingOpen) {
+      if (e.key === "Escape" && isBookingOpen) {
         setIsBookingOpen(false);
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [isBookingOpen]);
 
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isBookingOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isBookingOpen]);
 
@@ -50,8 +52,8 @@ const Index = () => {
       <Navbar onBookClick={handleBookClick} />
 
       {/* Hero Section */}
-      <Hero 
-        onBookClick={handleBookClick} 
+      <Hero
+        onBookClick={handleBookClick}
         onBeforeAfterClick={scrollToBeforeAfter}
       />
 
@@ -64,19 +66,16 @@ const Index = () => {
       {/* Testimonials */}
       <TestimonialsCarousel />
 
-    
-
-
       {/* Footer with Contact */}
       <Footer />
 
       {/* Sticky CTA */}
-      <StickyCTA onBookClick={handleBookClick} />
+      <StickyCTA />
 
       {/* Booking Modal */}
-      <BookingModal 
-        isOpen={isBookingOpen} 
-        onClose={() => setIsBookingOpen(false)} 
+      <BookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
       />
     </main>
   );

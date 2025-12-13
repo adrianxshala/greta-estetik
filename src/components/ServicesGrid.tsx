@@ -1,15 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Sparkles,
-  Syringe,
-  Heart,
-  Zap,
-  Eye,
-  Droplets,
-  X,
-} from "lucide-react";
+import { Sparkles, Syringe, Heart, Zap, Eye, Droplets, X } from "lucide-react";
 
 interface Service {
   id: string;
@@ -34,7 +26,7 @@ const services: Service[] = [
   },
   {
     id: "fillers",
-    icon: <Heart className="w-8 h-8" />,
+    icon: <Heart className="w-8 h-8  " />,
     title: "Dermal Fillers",
     shortDesc: "Volum dhe konturim i fytyrës",
     fullDesc:
@@ -94,17 +86,16 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
 
   return (
     <div
-      className="group relative bg-gradient-to-br from-card to-card/60 
-                 backdrop-blur-xl rounded-3xl p-8 border border-white/10 
-                 shadow-[0_8px_30px_rgb(0,0,0,0.08)]
+      className="group relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 border border-pink-100
+                 shadow-lg
                  transition-all duration-500 cursor-pointer
-                 hover:-translate-y-3 hover:shadow-accent/20 hover:border-accent/30"
+                 hover:-translate-y-3 hover:shadow-xl hover:border-pink-300 hover:bg-white"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Glow Layer */}
       <div
-        className={`absolute inset-0 rounded-3xl bg-gradient-to-br from-accent/10 to-transparent 
+        className={`absolute inset-0 rounded-3xl bg-gradient-to-br from-pink-500/10 to-purple-500/10 
                     opacity-0 group-hover:opacity-100 transition duration-500`}
       />
 
@@ -114,28 +105,28 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
                     shadow-lg transition-all duration-300
                     ${
                       isHovered
-                        ? "bg-accent text-accent-foreground scale-110 shadow-accent/40"
-                        : "bg-secondary text-primary"
+                        ? "bg-gradient-to-br from-pink-500 to-purple-600 text-white scale-110 shadow-pink-500/40"
+                        : "bg-pink-100 text-pink-600"
                     }`}
       >
         {service.icon}
       </div>
 
-      <h3 className="font-display text-2xl text-foreground mb-3 tracking-wide">
+      <h3 className="font-display text-2xl text-gray-900 mb-3 tracking-wide">
         {service.title}
       </h3>
 
-      <p className="text-muted-foreground mb-5 leading-relaxed text-sm">
+      <p className="text-gray-600 mb-5 leading-relaxed text-sm">
         {service.shortDesc}
       </p>
 
-      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8">
+      <div className="flex items-center gap-4 text-sm text-gray-600 mb-8">
         <span className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-accent" />
+          <span className="w-2 h-2 rounded-full bg-pink-500" />
           {service.duration}
         </span>
         <span className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-pink-400" />
+          <span className="w-2 h-2 rounded-full bg-purple-500" />
           {service.price}
         </span>
       </div>
@@ -145,8 +136,8 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
         className={`w-full py-3 rounded-xl font-medium transition-all duration-300
                     ${
                       isHovered
-                        ? "bg-accent text-accent-foreground"
-                        : "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground"
+                        ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+                        : "bg-pink-50 text-pink-600 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:text-white"
                     }`}
       >
         Learn More
@@ -164,42 +155,42 @@ const ServiceModal = ({ service, onClose }: ServiceModalProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
-        className="absolute inset-0 bg-primary/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm"
         onClick={onClose}
       />
 
-      <div className="relative bg-card rounded-3xl p-8 md:p-12 max-w-lg w-full shadow-2xl">
+      <div className="relative bg-white rounded-3xl p-8 md:p-12 max-w-lg w-full shadow-2xl">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-secondary transition"
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-pink-50 transition"
         >
-          <X className="w-6 h-6 text-muted-foreground" />
+          <X className="w-6 h-6 text-gray-600" />
         </button>
 
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-accent text-accent-foreground mb-6">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 text-white mb-6 shadow-lg">
           {service.icon}
         </div>
 
-        <h2 className="font-display text-3xl text-foreground mb-4">
+        <h2 className="font-display text-3xl text-gray-900 mb-4">
           {service.title}
         </h2>
 
-        <p className="text-muted-foreground leading-relaxed mb-8">
-          {service.fullDesc}
-        </p>
+        <p className="text-gray-600 leading-relaxed mb-8">{service.fullDesc}</p>
 
-        <div className="flex items-center justify-between p-4 bg-secondary rounded-xl mb-6">
+        <div className="flex items-center justify-between p-4 bg-pink-50 rounded-xl mb-6">
           <div>
-            <span className="text-sm text-muted-foreground">Duration</span>
-            <p className="font-semibold text-foreground">{service.duration}</p>
+            <span className="text-sm text-gray-600">Duration</span>
+            <p className="font-semibold text-gray-900">{service.duration}</p>
           </div>
           <div className="text-right">
-            <span className="text-sm text-muted-foreground">Starting From</span>
-            <p className="font-semibold text-accent">{service.price}</p>
+            <span className="text-sm text-gray-600">Starting From</span>
+            <p className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
+              {service.price}
+            </p>
           </div>
         </div>
 
-        <button className="w-full py-3 rounded-xl bg-accent text-accent-foreground font-medium">
+        <button className="w-full py-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium hover:from-pink-600 hover:to-purple-700 shadow-lg transition-all duration-300">
           Book This Treatment
         </button>
       </div>
@@ -211,38 +202,43 @@ const ServicesGrid = () => {
   const [selected, setSelected] = useState<Service | null>(null);
 
   return (
-    <div className="relative py-20">
-      {/* Animated Gradient Background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl opacity-40">
-        
-      </div>
+    <section className="relative py-20 bg-gradient-to-br from-pink-50 via-white to-purple-50 overflow-hidden">
+      {/* Background Blobs - matching Hero section */}
+      <div className="absolute top-20 -right-20 w-96 h-96 bg-pink-400/20 rounded-full blur-3xl animate-pulse" />
+      <div
+        className="absolute -bottom-20 -left-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl animate-pulse"
+        style={{ animationDelay: "1s" }}
+      />
 
-      {/* Section Title */}
-      <div className="relative mb-14 text-center">
-        <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground tracking-wide drop-shadow-sm">
-          Our Treatments
-        </h2>
-        <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-          Zgjidh trajtimin që të përshtatet – kombinim i estetikës moderne me rezultate natyrale.
-        </p>
-      </div>
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Section Title */}
+        <div className="mb-14 text-center">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900 tracking-wide drop-shadow-sm">
+            Our Treatments
+          </h2>
+          <p className="text-gray-600 mt-3 max-w-xl mx-auto text-lg">
+            Zgjidh trajtimin që të përshtatet – kombinim i estetikës moderne me
+            rezultate natyrale.
+          </p>
+        </div>
 
-      {/* GRID */}
-      <div className="relative grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((service) => (
-          <ServiceCard
-            key={service.id}
-            service={service}
-            onLearnMore={setSelected}
-          />
-        ))}
+        {/* GRID */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              onLearnMore={setSelected}
+            />
+          ))}
+        </div>
       </div>
 
       {/* MODAL */}
       {selected && (
         <ServiceModal service={selected} onClose={() => setSelected(null)} />
       )}
-    </div>
+    </section>
   );
 };
 

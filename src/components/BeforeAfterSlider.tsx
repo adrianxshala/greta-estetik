@@ -8,11 +8,11 @@ interface BeforeAfterSliderProps {
   afterLabel?: string;
 }
 
-const BeforeAfterSlider = ({ 
-  beforeImage, 
-  afterImage, 
-  beforeLabel = "Para", 
-  afterLabel = "Pas" 
+const BeforeAfterSlider = ({
+  beforeImage,
+  afterImage,
+  beforeLabel = "Para",
+  afterLabel = "Pas",
 }: BeforeAfterSliderProps) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -20,7 +20,7 @@ const BeforeAfterSlider = ({
 
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
-    
+
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
@@ -30,44 +30,50 @@ const BeforeAfterSlider = ({
   const handleMouseDown = () => setIsDragging(true);
   const handleMouseUp = () => setIsDragging(false);
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (isDragging) {
-      handleMove(e.clientX);
-    }
-  }, [isDragging, handleMove]);
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (isDragging) {
+        handleMove(e.clientX);
+      }
+    },
+    [isDragging, handleMove]
+  );
 
-  const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (isDragging && e.touches[0]) {
-      handleMove(e.touches[0].clientX);
-    }
-  }, [isDragging, handleMove]);
+  const handleTouchMove = useCallback(
+    (e: TouchEvent) => {
+      if (isDragging && e.touches[0]) {
+        handleMove(e.touches[0].clientX);
+      }
+    },
+    [isDragging, handleMove]
+  );
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') {
-      setSliderPosition(prev => Math.max(0, prev - 5));
-    } else if (e.key === 'ArrowRight') {
-      setSliderPosition(prev => Math.min(100, prev + 5));
+    if (e.key === "ArrowLeft") {
+      setSliderPosition((prev) => Math.max(0, prev - 5));
+    } else if (e.key === "ArrowRight") {
+      setSliderPosition((prev) => Math.min(100, prev + 5));
     }
   };
 
   useEffect(() => {
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('touchmove', handleTouchMove);
-    document.addEventListener('touchend', handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchend", handleMouseUp);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleMouseUp);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleMouseUp);
     };
   }, [handleMouseMove, handleTouchMove]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden cursor-ew-resize select-none shadow-2xl"
+      className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden cursor-ew-resize select-none shadow-2xl group"
       onMouseDown={handleMouseDown}
       onTouchStart={handleMouseDown}
       role="slider"
@@ -79,51 +85,60 @@ const BeforeAfterSlider = ({
       onKeyDown={handleKeyDown}
     >
       {/* After Image (Bottom Layer) */}
-      <img 
+      <img
         src={afterImage}
         alt="After treatment"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         loading="lazy"
       />
 
       {/* Before Image (Top Layer with Clip) */}
-      <div 
+      <div
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <img 
+        <img
           src={beforeImage}
           alt="Before treatment"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
       </div>
 
-      {/* Labels */}
-      <div className="absolute top-4 left-4 bg-primary/80 backdrop-blur-sm text-primary-foreground px-4 py-2 rounded-full text-sm font-medium">
+      {/* Labels - Modern Pink/Purple Theme */}
+      <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-semibold shadow-lg border border-pink-200">
         {beforeLabel}
       </div>
-      <div className="absolute top-4 right-4 bg-accent/90 backdrop-blur-sm text-accent-foreground px-4 py-2 rounded-full text-sm font-medium">
+      <div className="absolute top-4 right-4 bg-gradient-to-r from-pink-500 to-purple-600 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
         {afterLabel}
       </div>
 
-      {/* Slider Handle */}
-      <div 
-        className="absolute top-0 bottom-0 w-1 bg-white/90 shadow-lg z-10 transition-shadow"
-        style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+      {/* Slider Handle - Modern Design */}
+      <div
+        className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-pink-500 to-purple-600 shadow-lg z-10 transition-shadow"
+        style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                        w-14 h-14 rounded-full bg-white shadow-xl
-                        flex items-center justify-center
-                        border-4 border-accent transition-transform duration-200
-                        hover:scale-110">
-          <GripVertical className="w-6 h-6 text-primary" />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                w-14 h-14 rounded-full 
+                bg-white/95 backdrop-blur-md 
+                border-2 border-pink-400
+                shadow-[0_0_30px_rgba(236,72,153,0.5)]
+                flex items-center justify-center
+                transition-all duration-300
+                hover:scale-125 hover:shadow-[0_0_40px_rgba(236,72,153,0.7)] hover:border-pink-500
+                cursor-grab active:cursor-grabbing active:scale-110"
+        >
+          <GripVertical className="w-7 h-7 text-pink-600 drop-shadow" />
         </div>
       </div>
 
-      {/* Instruction Overlay */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-primary/60 backdrop-blur-sm 
-                      text-primary-foreground px-4 py-2 rounded-full text-sm opacity-60">
+      {/* Instruction Overlay - Modern Style */}
+      <div
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm 
+                      text-gray-700 px-4 py-2 rounded-full text-xs font-medium shadow-lg border border-pink-200/50
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      >
         ← Drag to compare →
       </div>
     </div>

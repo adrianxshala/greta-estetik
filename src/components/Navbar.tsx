@@ -29,18 +29,17 @@ const Navbar = ({ onBookClick }: NavbarProps) => {
   return (
     <>
       <nav
-      className="
-      fixed top-0 left-0 right-0 z-50
-      backdrop-blur-xl bg-white/10 
-      border-b 
-      border-transparent 
-      [border-image:linear-gradient(to right, #fb7185, #f472b6, #a78bfa)_1]
-      py-2 transition-all duration-500
-      m-2
-      rounded-3lg
-    "
-    role="navigation"
-    aria-label="Main navigation"
+        className="
+        fixed top-0 left-0 right-0 z-50
+        backdrop-blur-xl bg-white/10
+        border border-pink-200
+        py-2 transition-all duration-500
+        m-2
+        rounded-3xl
+        shadow-lg shadow-pink-100/50
+      "
+        role="navigation"
+        aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
