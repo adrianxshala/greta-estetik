@@ -10,11 +10,14 @@ import {
   Eye,
   Droplets,
   X,
-  
   Droplet,
   Clock,
 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import botoxImage from "../assets/botox.png";
+import fillerImage from "../assets/filler.jpeg";
+import skinImage from "../assets/skin.jpg";
+import faceImage from "../assets/face.jpg";
 
 interface Service {
   id: string;
@@ -24,7 +27,7 @@ interface Service {
   fullDesc: string;
   duration: string;
   price: string;
-  image: string;
+  image: string | typeof botoxImage;
   treatmentAreas?: string;
 }
 
@@ -39,8 +42,7 @@ const services: Service[] = [
       "Trajtimi me Botox redukton linjat e shprehjes në ballë, mes vetullave dhe rreth syve. Rezultatet shfaqen brenda 3-7 ditësh dhe zgjasin 3-4 muaj.",
     duration: "30 min",
     price: "€150 - €350",
-    image:
-      "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&h=400&fit=crop&q=80",
+    image: botoxImage,
   },
   {
     id: "fillers",
@@ -53,8 +55,7 @@ const services: Service[] = [
       "Fillers me acid hialuronik për buzët, faqet, dhe zonën e nofullës. Rezultate të menjëhershme që zgjasin 12-18 muaj.",
     duration: "45 min",
     price: "€250 - €500",
-    image:
-      "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600&h=400&fit=crop&q=80",
+    image: fillerImage,
   },
   {
     id: "sunekos",
@@ -67,8 +68,7 @@ const services: Service[] = [
       "Sunekos Skinbooster - hidratim i thellë dhe rinovim i lëkurës për komplet ftyra, zona e faqeve, zona e mjekrres, zona e dekoltes dhe zona e qafes.",
     duration: "60 min",
     price: "€200 - €400",
-    image:
-      "https://images.unsplash.com/photo-1631631483669-9d8458f8c7a9?w=600&h=400&fit=crop&q=80",
+    image: skinImage,
   },
   {
     id: "coming-soon",
@@ -80,8 +80,7 @@ const services: Service[] = [
       "Shërbime të reja për pastrim të thellë të fytyres - vijnë së shpejti!",
     duration: "TBA",
     price: "TBA",
-    image:
-      "https://images.unsplash.com/photo-1605405742228-97e226423b5b?w=600&h=400&fit=crop&q=80",
+    image: faceImage,
   },
 ];
 
@@ -122,10 +121,16 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
           src={service.image}
           alt={service.title}
           className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
           animate={{
-            scale: isHovered ? 1.1 : 1,
+            scale: isHovered ? 1.05 : 1,
           }}
-          transition={{ duration: 0.5 }}
+          transition={{
+            duration: 0.4,
+            ease: "easeOut" as const,
+          }}
+          style={{ willChange: "transform" }}
         />
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-pink-500/40 via-transparent to-transparent" />
@@ -311,33 +316,35 @@ const ServicesGrid = () => {
 
   return (
     <section className="relative py-20 lg:py-32 bg-gradient-to-br from-pink-50 via-white to-purple-50 overflow-hidden">
-      {/* Background Blobs - matching Hero section */}
+      {/* Background Blobs - Optimized */}
       <motion.div
         className="absolute top-20 -right-20 w-96 h-96 bg-pink-400/20 rounded-full blur-3xl"
         animate={{
-          scale: [1, 1.2, 1],
-          x: [0, 50, 0],
-          y: [0, 30, 0],
+          scale: [1, 1.15, 1],
+          x: [0, 30, 0],
+          y: [0, 20, 0],
         }}
         transition={{
-          duration: 8,
+          duration: 12,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut" as const,
         }}
+        style={{ willChange: "transform" }}
       />
       <motion.div
         className="absolute -bottom-20 -left-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"
         animate={{
-          scale: [1, 1.3, 1],
-          x: [0, -40, 0],
-          y: [0, -20, 0],
+          scale: [1, 1.2, 1],
+          x: [0, -30, 0],
+          y: [0, -15, 0],
         }}
         transition={{
-          duration: 10,
+          duration: 15,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut" as const,
           delay: 1,
         }}
+        style={{ willChange: "transform" }}
       />
 
       <div className="container mx-auto px-4 relative z-10">

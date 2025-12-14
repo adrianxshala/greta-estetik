@@ -172,59 +172,32 @@ const BeforeAfterSection = () => {
           {beforeAfterPairs.map((pair, index) => (
             <motion.div
               key={pair.id}
-              initial={{ opacity: 0, y: 80, scale: 0.9, rotateX: 15 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{
-                duration: 0.8,
-                delay: index * 0.2,
-                type: "spring",
-                stiffness: 100,
-                damping: 15,
+                duration: 0.5,
+                delay: index * 0.15,
+                ease: "easeOut" as const,
               }}
               whileHover={{
-                y: -12,
-                scale: 1.03,
+                y: -8,
+                scale: 1.02,
                 transition: {
-                  duration: 0.4,
-                  type: "spring",
-                  stiffness: 300,
+                  duration: 0.3,
+                  ease: "easeOut" as const,
                 },
               }}
               className="group relative"
-              style={{ perspective: "1000px" }}
+              style={{ willChange: "transform" }}
             >
               {/* Animated Glow background */}
               <motion.div
-                className="absolute -inset-6 bg-gradient-to-br from-pink-500/30 via-purple-500/30 to-pink-500/30 rounded-3xl blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                animate={{
-                  scale: [1, 1.15, 1],
-                  rotate: [0, 5, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                className="absolute -inset-6 bg-gradient-to-br from-pink-500/30 via-purple-500/30 to-pink-500/30 rounded-3xl blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ willChange: "opacity" }}
               />
 
-              {/* Shimmer effect */}
-              <motion.div
-                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                animate={{
-                  background: [
-                    "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
-                    "linear-gradient(180deg, transparent, rgba(255,255,255,0.3), transparent)",
-                    "linear-gradient(270deg, transparent, rgba(255,255,255,0.3), transparent)",
-                    "linear-gradient(360deg, transparent, rgba(255,255,255,0.3), transparent)",
-                  ],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
+              {/* Shimmer effect - removed complex animation to prevent glitches */}
 
               <motion.div
                 className="relative bg-white/95 backdrop-blur-md border-2 border-pink-200/50 rounded-3xl p-6 sm:p-8 shadow-2xl group-hover:shadow-[0_25px_50px_-12px_rgba(236,72,153,0.3)] group-hover:border-pink-400 transition-all duration-500 overflow-hidden"

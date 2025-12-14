@@ -1,37 +1,39 @@
 import { motion } from "framer-motion";
 import { Sparkles, Star } from "lucide-react";
-import gretaImage from "../../public/greta png.png";
+import gretaImage from "../assets/greta.png";
 
 const BiographySection = () => {
   return (
     <section className="relative py-20 lg:py-32 bg-gradient-to-br from-pink-50 via-white to-purple-50 overflow-hidden">
-      {/* Background Blobs */}
+      {/* Background Blobs - Optimized */}
       <motion.div
         className="absolute top-20 -right-20 w-96 h-96 bg-pink-400/20 rounded-full blur-3xl"
         animate={{
-          scale: [1, 1.2, 1],
-          x: [0, 50, 0],
-          y: [0, 30, 0],
+          scale: [1, 1.15, 1],
+          x: [0, 30, 0],
+          y: [0, 20, 0],
         }}
         transition={{
-          duration: 8,
+          duration: 12,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut" as const,
         }}
+        style={{ willChange: "transform" }}
       />
       <motion.div
         className="absolute -bottom-20 -left-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"
         animate={{
-          scale: [1, 1.3, 1],
-          x: [0, -40, 0],
-          y: [0, -20, 0],
+          scale: [1, 1.2, 1],
+          x: [0, -30, 0],
+          y: [0, -15, 0],
         }}
         transition={{
-          duration: 10,
+          duration: 15,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut" as const,
           delay: 1,
         }}
+        style={{ willChange: "transform" }}
       />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -120,10 +122,16 @@ const BiographySection = () => {
                   src={gretaImage}
                   alt="Dr. Greta Berisha - Stomatologe dhe Estetiste e Certifikuar"
                   className="w-full h-auto object-cover"
-                  initial={{ scale: 1.1 }}
-                  whileInView={{ scale: 1 }}
+                  loading="lazy"
+                  decoding="async"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: "easeOut" as const,
+                  }}
+                  style={{ willChange: "transform, opacity" }}
                 />
 
                 {/* Decorative elements */}

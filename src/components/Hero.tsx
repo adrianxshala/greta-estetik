@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Phone, Sparkles } from "lucide-react";
 import { useState } from "react";
-import heroImage from "../../public/greta png.png";
+import heroImage from "../assets/greta.png";
 
 interface HeroProps {
   onBookClick: () => void;
@@ -28,15 +28,13 @@ const fadeBlurUp = {
   hidden: {
     opacity: 0,
     y: 40,
-    filter: "blur(12px)",
   },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
-      duration: 0.8,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      duration: 0.6,
+      ease: "easeOut" as const,
     },
   },
 };
@@ -44,23 +42,17 @@ const fadeBlurUp = {
 const imageReveal = {
   hidden: {
     opacity: 0,
-    scale: 0.8,
-    rotateY: -20,
-    rotateX: 10,
-    filter: "blur(20px)",
-    y: 50,
+    scale: 0.95,
+    y: 30,
   },
   visible: {
     opacity: 1,
     scale: 1,
-    rotateY: 0,
-    rotateX: 0,
-    filter: "blur(0px)",
     y: 0,
     transition: {
-      duration: 1.5,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
-      delay: 0.3,
+      duration: 0.8,
+      ease: "easeOut" as const,
+      delay: 0.2,
     },
   },
 };
@@ -105,45 +97,35 @@ const Hero = ({ onBookClick, onBeforeAfterClick }: HeroProps) => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-pink-50 via-white to-purple-50">
-      {/* Animated Background Blobs */}
+      {/* Animated Background Blobs - Optimized */}
       <motion.div
         className="absolute top-20 -right-20 w-96 h-96 bg-pink-400/20 rounded-full blur-3xl"
         animate={{
-          scale: [1, 1.2, 1],
-          x: [0, 50, 0],
-          y: [0, 30, 0],
+          scale: [1, 1.15, 1],
+          x: [0, 30, 0],
+          y: [0, 20, 0],
         }}
         transition={{
-          duration: 8,
+          duration: 12,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut" as const,
         }}
+        style={{ willChange: "transform" }}
       />
       <motion.div
         className="absolute -bottom-20 -left-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"
         animate={{
-          scale: [1, 1.3, 1],
-          x: [0, -40, 0],
-          y: [0, -20, 0],
+          scale: [1, 1.2, 1],
+          x: [0, -30, 0],
+          y: [0, -15, 0],
         }}
         transition={{
-          duration: 10,
+          duration: 15,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut" as const,
           delay: 1,
         }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-300/10 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        style={{ willChange: "transform" }}
       />
 
       <div className="container mx-auto px-4 py-20 relative z-10">

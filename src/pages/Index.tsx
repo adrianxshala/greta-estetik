@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import ServicesGrid from "@/components/ServicesGrid";
-import BeforeAfterSection from "@/components/BeforeAfterSection";
-import BiographySection from "@/components/BiographySection";
-import TestimonialsCarousel from "@/components/TestimonialsCarousel";
-
 import Footer from "@/components/Footer";
 import BookingModal from "@/components/BookingModal";
 import StickyCTA from "@/components/StickyCTA";
+
+// Lazy load heavy components
+const ServicesGrid = lazy(() => import("@/components/ServicesGrid"));
+const BeforeAfterSection = lazy(() => import("@/components/BeforeAfterSection"));
+const BiographySection = lazy(() => import("@/components/BiographySection"));
+const TestimonialsCarousel = lazy(() => import("@/components/TestimonialsCarousel"));
 
 const Index = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -59,16 +60,24 @@ const Index = () => {
       />
 
       {/* Services Grid */}
-      <ServicesGrid />
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <ServicesGrid />
+      </Suspense>
 
       {/* Biography Section */}
-      <BiographySection />
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <BiographySection />
+      </Suspense>
 
       {/* Before/After Section */}
-      <BeforeAfterSection />
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <BeforeAfterSection />
+      </Suspense>
 
       {/* Testimonials */}
-      <TestimonialsCarousel />
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <TestimonialsCarousel />
+      </Suspense>
 
       {/* Footer with Contact */}
       <Footer />

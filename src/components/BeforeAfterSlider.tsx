@@ -96,26 +96,42 @@ const BeforeAfterSlider = ({
         alt="After treatment"
         className="absolute inset-0 w-full h-full object-cover"
         initial={{ scale: 1 }}
-        animate={{ scale: isHovered ? 1.05 : 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        animate={{ scale: isHovered ? 1.02 : 1 }}
+        transition={{
+          duration: 0.4,
+          ease: "easeOut" as const,
+        }}
         loading="lazy"
+        decoding="async"
+        style={{ willChange: "transform" }}
       />
 
       {/* Before Image (Top Layer with Clip) */}
       <motion.div
         className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        style={{
+          clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+          willChange: "clip-path",
+        }}
         animate={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-        transition={{ duration: isDragging ? 0 : 0.3, ease: "easeOut" }}
+        transition={{
+          duration: isDragging ? 0 : 0.2,
+          ease: "easeOut" as const,
+        }}
       >
         <motion.img
           src={beforeImage}
           alt="Before treatment"
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1 }}
-          animate={{ scale: isHovered ? 1.05 : 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          animate={{ scale: isHovered ? 1.02 : 1 }}
+          transition={{
+            duration: 0.4,
+            ease: "easeOut" as const,
+          }}
           loading="lazy"
+          decoding="async"
+          style={{ willChange: "transform" }}
         />
       </motion.div>
 
@@ -172,7 +188,9 @@ const BeforeAfterSlider = ({
               : isHovered
               ? "0 0 40px rgba(236, 72, 153, 0.6), 0 0 50px rgba(168, 85, 247, 0.4)"
               : "0 0 30px rgba(236, 72, 153, 0.5), 0 0 40px rgba(168, 85, 247, 0.3)",
-            borderColor: isDragging ? "rgb(244, 114, 182)" : "rgb(236, 72, 153)",
+            borderColor: isDragging
+              ? "rgb(244, 114, 182)"
+              : "rgb(236, 72, 153)",
           }}
           transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
           whileHover={{ scale: 1.15 }}
@@ -185,7 +203,7 @@ const BeforeAfterSlider = ({
             <GripVertical className="w-7 h-7 text-pink-600 drop-shadow-lg" />
           </motion.div>
         </motion.div>
-        
+
         {/* Animated pulse ring */}
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-2 border-pink-400/50"
