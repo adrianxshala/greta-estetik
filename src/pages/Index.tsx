@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ServicesGrid from "@/components/ServicesGrid";
 import BeforeAfterSection from "@/components/BeforeAfterSection";
+import BiographySection from "@/components/BiographySection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 
 import Footer from "@/components/Footer";
@@ -59,6 +60,9 @@ const Index = () => {
 
       {/* Services Grid */}
       <ServicesGrid />
+
+      {/* Biography Section */}
+      <BiographySection />
 
       {/* Before/After Section */}
       <BeforeAfterSection />

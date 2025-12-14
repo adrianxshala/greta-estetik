@@ -1,254 +1,205 @@
-import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Send, Instagram, Facebook, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { MapPin, Phone, Sparkles } from "lucide-react";
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
-
-  const handleContactSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: "", email: "", message: "" });
-    
-    setTimeout(() => setIsSubmitted(false), 3000);
-  };
-
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate subscription
-    await new Promise(resolve => setTimeout(resolve, 500));
-    setEmail("");
-  };
 
   return (
-    <footer id="contact" className="bg-primary text-primary-foreground">
-      {/* Contact Section */}
-      <div className="section-padding border-b border-primary-foreground/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Contact Info */}
-            <div>
-              <span className="inline-block text-accent font-medium tracking-widest uppercase text-sm mb-4">
-                Na Kontaktoni
-              </span>
-              <h2 className="font-display text-4xl md:text-5xl mb-6">
-                Get In Touch
-              </h2>
-              <p className="text-primary-foreground/70 text-lg mb-10 max-w-md">
-                Jemi këtu për t'ju ndihmuar në rrugëtimin tuaj estetik. Kontaktoni për konsultim falas.
-              </p>
+    <footer id="contact" className="relative bg-gradient-to-br from-pink-50 via-white to-purple-50 overflow-hidden">
+      {/* Background Blobs */}
+      <motion.div
+        className="absolute top-20 -right-20 w-96 h-96 bg-pink-400/20 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          x: [0, 50, 0],
+          y: [0, 30, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute -bottom-20 -left-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.3, 1],
+          x: [0, -40, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+      />
 
-              {/* Contact Details */}
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-1">Adresa</p>
-                    <p className="text-primary-foreground/70">Rruga e Durrësit Nr. 123, Tiranë, Shqipëri</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-1">Telefoni</p>
-                    <a href="tel:+35569123456" className="text-primary-foreground/70 hover:text-accent transition-colors">
-                      +355 69 123 4567
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-1">Email</p>
-                    <a href="mailto:info@aesthetica.al" className="text-primary-foreground/70 hover:text-accent transition-colors">
-                      info@aesthetica.al
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-1">Orari</p>
-                    <p className="text-primary-foreground/70">E Hënë - E Shtunë: 09:00 - 19:00</p>
-                    <p className="text-primary-foreground/70">E Diel: Mbyllur</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex items-center gap-4 mt-10">
-                <a 
-                  href="#" 
-                  className="w-12 h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center
-                            hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-                  aria-label="Follow us on Instagram"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a 
-                  href="#" 
-                  className="w-12 h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center
-                            hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-                  aria-label="Follow us on Facebook"
-                >
-                  <Facebook className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div className="bg-primary-foreground/5 rounded-3xl p-8 md:p-10">
-              <h3 className="font-display text-2xl mb-6">Dërgoni Mesazh</h3>
-              
-              {isSubmitted ? (
-                <div className="flex flex-col items-center justify-center py-12 text-center animate-fade-in">
-                  <div className="w-16 h-16 rounded-full bg-accent flex items-center justify-center mb-4">
-                    <Send className="w-8 h-8 text-accent-foreground" />
-                  </div>
-                  <p className="text-xl font-semibold">Faleminderit!</p>
-                  <p className="text-primary-foreground/70">Do t'ju kontaktojmë së shpejti.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleContactSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">Emri i Plotë</label>
-                    <input
-                      type="text"
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-primary-foreground/10 border border-primary-foreground/20
-                                text-primary-foreground placeholder:text-primary-foreground/40
-                                focus:outline-none focus:border-accent transition-colors"
-                      placeholder="Emri juaj"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-primary-foreground/10 border border-primary-foreground/20
-                                text-primary-foreground placeholder:text-primary-foreground/40
-                                focus:outline-none focus:border-accent transition-colors"
-                      placeholder="email@example.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">Mesazhi</label>
-                    <textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      required
-                      rows={4}
-                      className="w-full px-4 py-3 rounded-xl bg-primary-foreground/10 border border-primary-foreground/20
-                                text-primary-foreground placeholder:text-primary-foreground/40
-                                focus:outline-none focus:border-accent transition-colors resize-none"
-                      placeholder="Si mund t'ju ndihmojmë?"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-accent text-accent-foreground py-4 rounded-xl font-semibold
-                              transition-all duration-300 hover:shadow-lg hover:shadow-accent/30
-                              disabled:opacity-50 disabled:cursor-not-allowed
-                              flex items-center justify-center gap-2"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-accent-foreground/30 border-t-accent-foreground rounded-full animate-spin" />
-                        Duke dërguar...
-                      </>
-                    ) : (
-                      <>
-                        Dërgo Mesazhin
-                        <Send className="w-5 h-5" />
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Map Placeholder */}
-      <div className="h-64 bg-primary-foreground/5 flex items-center justify-center">
-        <div className="text-center">
-          <MapPin className="w-12 h-12 text-accent mx-auto mb-4" />
-          <p className="text-primary-foreground/70">Harta Interaktive</p>
-          <p className="text-sm text-primary-foreground/50">Rruga e Durrësit Nr. 123, Tiranë</p>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="py-8 px-6 border-t border-primary-foreground/10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-              <span className="font-display text-accent-foreground font-bold">A</span>
-            </div>
-            <span className="font-display text-xl">Aesthetica</span>
-          </div>
-
-          {/* Newsletter */}
-          <form onSubmit={handleNewsletterSubmit} className="flex items-center gap-2">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email për lajme dhe oferta"
-              className="px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20
-                        text-primary-foreground placeholder:text-primary-foreground/40 text-sm
-                        focus:outline-none focus:border-accent transition-colors w-64"
-            />
-            <button
-              type="submit"
-              className="p-2 rounded-full bg-accent text-accent-foreground hover:bg-gold-dark transition-colors"
-              aria-label="Subscribe to newsletter"
+      {/* Footer Content - Cute & Elegant */}
+      <div className="relative z-10 py-12 lg:py-16">
+        <div className="container mx-auto px-4">
+          {/* Section Header - Small & Cute */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-10"
+          >
+            <motion.span
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                delay: 0.2,
+                type: "spring",
+                stiffness: 200
+              }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-100/80 to-purple-100/80 text-pink-600 font-medium text-xs mb-4 shadow-sm border border-pink-200/30 backdrop-blur-sm"
             >
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </form>
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles className="w-3 h-3" />
+              </motion.div>
+              Kontakti
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                delay: 0.3, 
+                duration: 0.6,
+                type: "spring"
+              }}
+              className="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-3 tracking-tight"
+            >
+              Na{" "}
+              <motion.span
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-pink-600 bg-[length:200%_auto] inline-block"
+              >
+                Kontaktoni
+              </motion.span>
+            </motion.h2>
+          </motion.div>
 
-          {/* Copyright */}
-          <p className="text-primary-foreground/50 text-sm">
-            © 2024 Aesthetica. Të gjitha të drejtat e rezervuara.
-          </p>
+          {/* Contact Info - Small Elegant Cards */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-2xl mx-auto">
+            {/* Phone */}
+            <motion.a
+              href="tel:+38349422181"
+              initial={{ opacity: 0, y: 20, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                delay: 0.2, 
+                duration: 0.5,
+                type: "spring",
+                stiffness: 200
+              }}
+              whileHover={{ 
+                scale: 1.03, 
+                y: -4,
+                transition: { duration: 0.2 }
+              }}
+              className="relative flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-2xl px-5 py-4 shadow-md border border-pink-200/40 hover:border-pink-300 hover:shadow-lg hover:shadow-pink-500/10 transition-all duration-300 group w-full sm:w-auto"
+            >
+              {/* Tiny decorative dot */}
+              <motion.div
+                className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-pink-400"
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.6, 1, 0.6],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              
+              {/* Small Icon */}
+              <motion.div
+                className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300"
+                whileHover={{ 
+                  rotate: [0, -3, 3, 0],
+                  scale: 1.05
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <Phone className="w-5 h-5 text-white" />
+              </motion.div>
+
+              <div>
+                <p className="font-medium text-gray-500 text-xs mb-0.5">Telefoni</p>
+                <p className="text-base font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:to-purple-500 transition-all duration-300">
+                  +383 49 422 181
+                </p>
+              </div>
+            </motion.a>
+
+            {/* Location */}
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                delay: 0.3, 
+                duration: 0.5,
+                type: "spring",
+                stiffness: 200
+              }}
+              whileHover={{ 
+                scale: 1.03, 
+                y: -4,
+                transition: { duration: 0.2 }
+              }}
+              className="relative flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-2xl px-5 py-4 shadow-md border border-pink-200/40 hover:border-pink-300 hover:shadow-lg hover:shadow-pink-500/10 transition-all duration-300 group w-full sm:w-auto"
+            >
+              {/* Tiny decorative dot */}
+              <motion.div
+                className="absolute top-2 left-2 w-1.5 h-1.5 rounded-full bg-purple-400"
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.6, 1, 0.6],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5
+                }}
+              />
+              
+              {/* Small Icon */}
+              <motion.div
+                className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300"
+                whileHover={{ 
+                  rotate: [0, 3, -3, 0],
+                  scale: 1.05
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <MapPin className="w-5 h-5 text-white" />
+              </motion.div>
+
+              <div>
+                <p className="font-medium text-gray-500 text-xs mb-0.5">Lokacioni</p>
+                <p className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent group-hover:from-purple-500 group-hover:to-pink-500 transition-all duration-300 leading-tight">
+                  Suhareke, Stac. Autobusave
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </footer>

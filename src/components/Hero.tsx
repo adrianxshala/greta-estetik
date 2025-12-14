@@ -36,7 +36,7 @@ const fadeBlurUp = {
     filter: "blur(0px)",
     transition: {
       duration: 0.8,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
@@ -59,7 +59,7 @@ const imageReveal = {
     y: 0,
     transition: {
       duration: 1.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
       delay: 0.3,
     },
   },
@@ -72,7 +72,7 @@ const floating = {
     transition: {
       duration: 5,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
     },
   },
 };
@@ -84,7 +84,7 @@ const sparkleAnimation = {
     transition: {
       duration: 3,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
     },
   },
 };
@@ -95,7 +95,7 @@ const gradientText = {
     transition: {
       duration: 5,
       repeat: Infinity,
-      ease: "linear",
+      ease: "linear" as const,
     },
   },
 };
@@ -148,7 +148,6 @@ const Hero = ({ onBookClick, onBeforeAfterClick }: HeroProps) => {
 
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          
           {/* TEXT CONTENT */}
           <motion.div
             variants={containerStagger}
@@ -171,21 +170,22 @@ const Hero = ({ onBookClick, onBeforeAfterClick }: HeroProps) => {
               variants={fadeBlurUp}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
             >
-              Zbuloni bukurinë tuaj{" "}
+              Zbuloni{" "}
               <motion.span
                 variants={gradientText}
                 animate="animate"
                 className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-pink-600 bg-[length:200%_auto] inline-block"
               >
-                natyrore
-              </motion.span>
+                bukurinë
+              </motion.span>{" "}
+              natyrore
             </motion.h1>
 
             <motion.p
               variants={fadeBlurUp}
               className="text-lg md:text-xl text-gray-600 max-w-xl mx-auto lg:mx-0"
             >
-              me trajtime estetike të avancuara, të realizuara me kujdes dhe
+              Me trajtime estetike të avancuara, të realizuara me kujdes dhe
               profesionalizëm.
             </motion.p>
 
@@ -199,8 +199,17 @@ const Hero = ({ onBookClick, onBeforeAfterClick }: HeroProps) => {
               >
                 <Button
                   size="lg"
-                  onClick={onBookClick}
-                  aria-label="Rezervo termin me Dr. Greta Berisha"
+                  onClick={() => {
+                    const phoneNumber = "355691234567"; // WhatsApp number without + and spaces
+                    const message = encodeURIComponent(
+                      "Përshëndetje! Dëshiroj të rezervoj një termin."
+                    );
+                    window.open(
+                      `https://wa.me/${phoneNumber}?text=${message}`,
+                      "_blank"
+                    );
+                  }}
+                  aria-label="Rezervo termin me Dr. Greta Berisha në WhatsApp"
                   className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white shadow-lg hover:shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 w-full sm:w-auto"
                 >
                   <motion.div
@@ -226,7 +235,11 @@ const Hero = ({ onBookClick, onBeforeAfterClick }: HeroProps) => {
                 >
                   <motion.div
                     animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
                   >
                     <Sparkles className="mr-2 h-5 w-5 inline" />
                   </motion.div>
@@ -291,7 +304,7 @@ const Hero = ({ onBookClick, onBeforeAfterClick }: HeroProps) => {
                   className="w-full h-full object-cover"
                   loading="eager"
                 />
-                
+
                 {/* Gradient Overlay on Hover */}
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -344,9 +357,9 @@ const Hero = ({ onBookClick, onBeforeAfterClick }: HeroProps) => {
                   opacity: 1,
                   y: imageHovered ? -5 : 0,
                 }}
-                transition={{ 
+                transition={{
                   opacity: { delay: 1.8, duration: 0.5 },
-                  y: { duration: 0.3 }
+                  y: { duration: 0.3 },
                 }}
                 className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl p-2 sm:p-3 shadow-lg z-20 border border-pink-100"
               >

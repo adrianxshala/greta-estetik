@@ -201,7 +201,7 @@ const TestimonialsCarousel = () => {
                   opacity: { duration: 0.2 },
                   scale: { duration: 0.2 },
                 }}
-                className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl border border-pink-200 hover:border-pink-300 hover:shadow-2xl transition-all duration-300"
+                className="bg-white/95 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl shadow-pink-500/20 border-2 border-pink-300 transition-all duration-300 ring-2 ring-pink-200/50"
               >
                 <div className="flex flex-col md:flex-row items-center gap-8">
                   {/* Quote Icon */}
@@ -247,7 +247,7 @@ const TestimonialsCarousel = () => {
                           repeat: Infinity,
                           ease: "easeInOut",
                         }}
-                        className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 opacity-0 group-hover:opacity-20 blur-xl"
+                        className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 opacity-20 blur-xl"
                       />
                       <img
                         src={current.image}
