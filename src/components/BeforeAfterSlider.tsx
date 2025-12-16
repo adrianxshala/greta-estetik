@@ -15,7 +15,7 @@ const BeforeAfterSlider = ({
   beforeLabel = "Para",
   afterLabel = "Pas",
 }: BeforeAfterSliderProps) => {
-  const [sliderPosition, setSliderPosition] = useState(50);
+  const [sliderPosition, setSliderPosition] = useState(50); // Start at center (50%)
   const [isDragging, setIsDragging] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -166,12 +166,14 @@ const BeforeAfterSlider = ({
       {/* Slider Handle - Modern Design with Advanced Animation */}
       <motion.div
         className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-pink-500 via-purple-500 to-pink-600 shadow-2xl z-10"
-        style={{ left: `${sliderPosition}%`, x: "-50%" }}
+        style={{ left: `${sliderPosition}%` }}
         animate={{
+          x: "-50%",
           boxShadow: isDragging
             ? "0 0 40px rgba(236, 72, 153, 0.8), 0 0 60px rgba(168, 85, 247, 0.6)"
             : "0 0 20px rgba(236, 72, 153, 0.4), 0 0 30px rgba(168, 85, 247, 0.3)",
         }}
+        initial={{ x: "-50%" }}
         transition={{ duration: 0.3 }}
       >
         <motion.div
@@ -229,7 +231,7 @@ const BeforeAfterSlider = ({
             transition={{ duration: 0.3, type: "spring" }}
             className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md 
                       text-gray-700 px-5 py-2.5 rounded-full text-xs font-semibold shadow-xl border-2 border-pink-300/50 z-20
-                      flex items-center gap-2"
+                      flex items-center justify-center gap-2 whitespace-nowrap"
           >
             <motion.div
               animate={{ x: [-2, 2, -2] }}

@@ -76,16 +76,6 @@ const BiographySection = () => {
               Greta
             </motion.span>
           </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="text-gray-600 max-w-2xl mx-auto text-lg"
-          >
-            Një ekspert e pasionuar për mjekësinë estetike, e përkushtuar për të
-            sjellë bukurinë më të natyrshme dhe rezultate të qëndrueshme
-          </motion.p>
         </motion.div>
 
         {/* Main Content */}
@@ -180,10 +170,33 @@ const BiographySection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.6 }}
-                className="text-lg md:text-xl font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent"
+                className="text-lg md:text-xl font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-6"
               >
                 Stomatologe dhe Estetiste e Certifikuar
               </motion.p>
+
+              {/* Professional Biography */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 }}
+                className="space-y-4 text-gray-700 leading-relaxed"
+              >
+                <p className="text-base md:text-lg">
+                  Dr. Greta Berisha është një profesioniste e certifikuar me
+                  pasion për mjekësinë estetike dhe stomatologjinë. Me formim
+                  solid dhe certifikime të njohura, ajo kombinon njohuritë e
+                  avancuara me një qasje personale për çdo pacient.
+                </p>
+
+                <p className="text-base md:text-lg">
+                  Specializuar në trajtime estetike moderne si Botox, Dermal
+                  Fillers dhe Sunekos Skinbooster, Dr. Berisha përdor teknika të
+                  avancuara dhe produkte të certifikuara për rezultate natyrale
+                  dhe të qëndrueshme.
+                </p>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>

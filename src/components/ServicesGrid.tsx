@@ -94,11 +94,8 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
       whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       className="group relative bg-white/95 backdrop-blur-md rounded-3xl overflow-hidden border-2 border-pink-200
                  shadow-2xl shadow-pink-500/20 ring-2 ring-pink-200/50
                  transition-all duration-500 cursor-pointer
@@ -174,8 +171,9 @@ const ServiceCard = ({ service, onLearnMore }: ServiceCardProps) => {
         {service.treatmentAreas && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
             className="mb-3"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50">
@@ -404,8 +402,12 @@ const ServicesGrid = () => {
               key={service.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                delay: index * 0.1, 
+                duration: 0.6,
+                ease: "easeOut"
+              }}
             >
               <ServiceCard service={service} onLearnMore={setSelected} />
             </motion.div>
